@@ -1,3 +1,4 @@
+
 //selecionando e adicionando nas variáveis
 const listaDeTeclas = document.querySelectorAll('input[type=button]');//valores
 const inputTel = document.querySelector('input[type=tel]');//campo de digitação
@@ -10,4 +11,13 @@ for (i = 0; i < listaDeTeclas.length; i++){
     inputTel.value = inputTel.value + tecla.value;//o campo recebe o que já está nele mais o valor clicado 
   }
   
+  tecla.onkeydown = function(evento){
+    if (evento.code === "Enter" || evento.code === "Space"){
+      tecla.classList.add('ativa'); 
+    }
+    
+    tecla.onkeyup = function(){
+      tecla.classList.remove('ativa'); 
+    }
+  }
 }
