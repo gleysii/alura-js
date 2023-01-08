@@ -10,9 +10,7 @@ const listaDeTeclas = document.querySelectorAll('.tecla'); //criamos uma nodelis
 
 //se for um escopo muito grande o ideal é não ficar repetindo o código, mas sim, criar uma estrutura de repetição 
 
-let contador = 0;
-
-while(contador < listaDeTeclas.length){//compara e espera receber uma condição verdadeira ou falsa até o tamanho da lista
+for(let contador = 0; contador < listaDeTeclas.length; contador++){//compara e espera receber uma condição verdadeira ou falsa até o tamanho da lista
     //armazena-se trechos de código dentro de constantes para um código mais limpo 
     const tecla = listaDeTeclas[contador];
     const instrumento = tecla.classList[1];
@@ -23,10 +21,20 @@ while(contador < listaDeTeclas.length){//compara e espera receber uma condição
     tecla.onclick = function () {//para a função não ser invocada imediatamente, criamos essa function
         tocaSom(idAudio);
     } 
-    contador++; //incrementa mais 1 
     //console.log(contador); - serve para acompanhar, dentro do console, como o looping está funcionando 
+
+    //ao pressionar em cima da tecla, ela ficará vermelha, para tal acessamos a lista de teclas e adicionamos a classe dentro dela por meio de um evento - inserção de classe
+
+
+    tecla.onkeydown = function(evento){//o parâmetro event/e/evento fornece diversas propriedades e valores sobre o evento que acaba de ocorrer
+        
+        //essa propriedade code retorna como valor o nome da tecla pressionada
+        if(evento.code === "Enter" || evento.code === "Space"){
+          tecla.classList.add('ativa');
+        }
+
+        tecla.onkeyup = function(){
+          tecla.classList.remove('ativa');
+        }
+    }
 }
-
-
-//Anotações de trechos de códigos apagados
-//document.querySelector('.tecla_pom').onclick = tocaSomPom; /* (seletor individual) | quando a funcionalidade for chamada, vai disparar a função, mas se colocarmos ela com (), o navegador vai interpretar que é para executar imediatamente e vai bloquear porque precisa ter a interação do usuário primeiramente, como queremos apenas que a função onclick guarde "tocaSomPom" e execute a função quando clicarmos, retiramos os parêntesis.
