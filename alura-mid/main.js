@@ -1,6 +1,13 @@
 /*selecionar -> criar função que é executada somente quando chamada* -> indica elemento que vai chamar a função*/
-function tocaSom (idElementoAudio){//utilizamos parâmetros para informar qual o audio que vai tocar 
-    document.querySelector(idElementoAudio).play();
+function tocaSom (seletorAudio){//utilizamos parâmetros para informar qual o audio que vai tocar 
+   const elemento = document.querySelector(seletorAudio);
+  //essa validação é para caso alguém abra o console e coloque como parâmetro um seletor que não existe no html
+  if (elemento && elemento.localName === 'audio'){//se não for nulo (elemento != null) e se for do tipo audio
+    elemento.play();
+  }
+  else{
+    console.log('Elemento não encontrado ou seletor inválido');
+  }
 }
 
 /*colocamos numa constante para ficaar mais legível e fácil de trabalhar*/
@@ -38,3 +45,6 @@ for(let contador = 0; contador < listaDeTeclas.length; contador++){//compara e e
         }
     }
 }
+
+//Anotações de trechos de códigos apagados
+//document.querySelector('.tecla_pom').onclick = tocaSomPom; /* (seletor individual) | quando a funcionalidade for chamada, vai disparar a função, mas se colocarmos ela com (), o navegador vai interpretar que é para executar imediatamente e vai bloquear porque precisa ter a interação do usuário primeiramente, como queremos apenas que a função onclick guarde "tocaSomPom" e execute a função quando clicarmos, retiramos os parêntesis.
